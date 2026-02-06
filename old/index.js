@@ -399,3 +399,5 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('portfolioContactForm');
     if (form) form.addEventListener('submit', handleFormSubmit);
 });
+
+// ne comment
