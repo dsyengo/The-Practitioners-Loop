@@ -58,7 +58,6 @@ All UI sections were modularized in `views.js`.
 
 The application shell:
 
-
 <main id="app"></main>
 The index.js controller dynamically injects view content into this container based on the active route.
 This approach manually recreates component-based rendering without relying on a frontend framework.
@@ -118,6 +117,7 @@ To handle contact form submissions from the static frontend and deliver messages
 ---
 
 ### 🔐 Input Validation Strategy
+
 - Client-Side
 
 - Regex-based validation for email and required fields
@@ -142,7 +142,6 @@ This established a multi-layer validation model to protect against malformed inp
 - Access-Control-Allow-Methods
 - Access-Control-Allow-Headers
 
-
 **Additionally implemented:**
 
 - OPTIONS preflight request handling
@@ -154,7 +153,7 @@ This established a multi-layer validation model to protect against malformed inp
 - Secure cross-origin communication between:
 
 - GitHub Pages (Static Frontend)
-              ↓
+  ↓
 - Python Backend Service (Dynamic)
 
 ---
@@ -163,43 +162,43 @@ This established a multi-layer validation model to protect against malformed inp
 
 ## ⚙ Frontend Framework Responsibilities (Recreated Manually)
 
-| Framework Feature              | Manual Implementation            |
-|--------------------------------|----------------------------------|
-| Router                         | Custom Hash-Router               |
-| Component Lifecycle            | `init()` callback                |
-| DOM Diffing / Rendering        | Manual `innerHTML` injection     |
-| State Management               | Route-based logic                |
-| 404 Fallback Handling          | Hash-based routing               |
+| Framework Feature       | Manual Implementation        |
+| ----------------------- | ---------------------------- |
+| Router                  | Custom Hash-Router           |
+| Component Lifecycle     | `init()` callback            |
+| DOM Diffing / Rendering | Manual `innerHTML` injection |
+| State Management        | Route-based logic            |
+| 404 Fallback Handling   | Hash-based routing           |
 
 **Insight:**  
 Frontend frameworks abstract routing, lifecycle management, state control, and rendering orchestration.  
 By implementing these manually, the internal mechanics of Single Page Applications became fully transparent.
+
 ---
 
 ## 🧱 Backend Framework Responsibilities (Recreated Manually)
 
-| Framework Feature              | Manual Implementation                |
-|--------------------------------|--------------------------------------|
-| Request Parsing                | Manual JSON parsing                  |
-| CORS Middleware                | Explicit header injection            |
-| Input Validation Libraries     | Custom validation logic              |
-| Route Handling                 | Conditional method-based routing     |
-| Environment Configuration      | Planned `.env` integration           |
+| Framework Feature          | Manual Implementation            |
+| -------------------------- | -------------------------------- |
+| Request Parsing            | Manual JSON parsing              |
+| CORS Middleware            | Explicit header injection        |
+| Input Validation Libraries | Custom validation logic          |
+| Route Handling             | Conditional method-based routing |
+| Environment Configuration  | Planned `.env` integration       |
 
- **Insight**
+**Insight**
 
- Frameworks such as Django or Flask provide structured architecture, middleware layers, and secure defaults. In this implementation, every responsibility—from request parsing to security header configuration—was handled explicitly. 
----
+## Frameworks such as Django or Flask provide structured architecture, middleware layers, and secure defaults. In this implementation, every responsibility—from request parsing to security header configuration—was handled explicitly.
 
-## 3️⃣ Deployment & Hybrid Architecture  
+## 3️⃣ Deployment & Hybrid Architecture
 
 ### 🌐 Dual Hosting Strategy
 
-| Layer     | Technology                      | Hosting Provider |
-|-----------|----------------------------------|------------------|
-| Frontend  | Vanilla HTML5 + ES Modules       | GitHub Pages     |
-| Backend   | Vanilla Python (v3.10+)          | Render / VPS     |
-| Routing   | Hash-Based SPA Routing           | Browser          |
+| Layer    | Technology                 | Hosting Provider |
+| -------- | -------------------------- | ---------------- |
+| Frontend | Vanilla HTML5 + ES Modules | GitHub Pages     |
+| Backend  | Vanilla Python (v3.10+)    | Tested Locally   |
+| Routing  | Hash-Based SPA Routing     | Browser          |
 
 ### 🚧 Infrastructure Decision
 
@@ -220,6 +219,7 @@ This decision reflects deployment-aware engineering rather than purely frontend 
 ---
 
 ### 4️⃣ Key Challenges & Solutions
+
 **🔴 Issue: 404 Errors on Refresh**
 
 Cause:
@@ -253,8 +253,7 @@ Secure frontend-backend communication was successfully established.
 
 ### 5️⃣ Reflection – Practitioner Growth
 
-Day 5 represented a shift from frontend implementation toward full-stack systems thinking.
----
+## Day 5 represented a shift from frontend implementation toward full-stack systems thinking.
 
 **📈 Technical Growth**
 
@@ -264,8 +263,7 @@ Day 5 represented a shift from frontend implementation toward full-stack systems
 
 - Configured CORS manually at the HTTP protocol level
 
-- Experienced the operational difference between local and production environments
---
+- ## Experienced the operational difference between local and production environments
 
 **🧠 Architectural Realizations**
 
@@ -275,8 +273,7 @@ Day 5 represented a shift from frontend implementation toward full-stack systems
 
 - Security must be explicitly engineered in distributed systems
 
-- SPA behavior is structured DOM orchestration, not hidden magic
---
+- ## SPA behavior is structured DOM orchestration, not hidden magic
 
 **⚙ DevOps Awareness**
 
