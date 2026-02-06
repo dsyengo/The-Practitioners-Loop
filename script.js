@@ -365,11 +365,51 @@ function renderContact() {
     `;
 }
 
-// Form Handling Logic
-async function handleFormSubmit(e) {
+
+
+
+/**
+ * Manual POST Handler with Full Field Validation
+ */
+async function handleManualPost(e) {
     e.preventDefault();
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData);
+    const form = e.target;
+    const btn = form.querySelector('.btn-submit');
+
+    // 1. Extract values
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const subject = form.subject.value.trim();
+    const message = form.message.value.trim();
+
+    // 2. Full Field Validation Logic
+    if (!name || name.length < 2) {
+        alert("Please enter your full name (minimum 2 characters).");
+        return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        alert("Please enter a valid professional email address.");
+        return;
+    }
+
+    if (!subject || subject.length < 5) {
+        alert("Please provide a subject (minimum 5 characters).");
+        return;
+    }
+
+    if (!message || message.length < 10) {
+        alert("Please enter a detailed message (minimum 10 characters).");
+        return;
+    }
+
+    // 3. Prepare Data for Transmission
+    const data = { name, email, subject, message };
+
+    // Visual feedback
+    btn.innerHTML = 'Securing & Sending... <i class="bi bi-hourglass-split"></i>';
+    btn.disabled = true;
 
     try {
         const response = await fetch('http://localhost:8000', {
@@ -379,29 +419,32 @@ async function handleFormSubmit(e) {
         });
 
         if (response.ok) {
-            alert("Message sent successfully!");
-            e.target.reset();
+            alert("Transmission Successful! I will review your request shortly.");
+            form.reset();
         } else {
-            alert("Server error. Please try again later.");
+            throw new Error('Server rejected the payload');
         }
     } catch (error) {
-        console.error("Connection error:", error);
+        console.error("Transmission Error:", error);
+        alert("Connection refused. Please verify your network and try again.");
+    } finally {
+        btn.innerHTML = 'Send Message <i class="bi bi-send"></i>';
+        btn.disabled = false;
+    }
+}
+
+function initContact() {
+    renderContact(); // Injects your specific contact details
+    const form = document.getElementById('portfolioContactForm');
+
+    // Ensure we attach the correct handler
+    if (form) {
+        form.addEventListener('submit', handleManualPost);
     }
 }
 
 
 
-// DOM listener
-document.addEventListener('DOMContentLoaded', () => {
-    // ... previous logic
-    renderProjects();
-    renderExperience();
-    renderCredentials()
-    renderBlog();
-    renderContact();
-    const form = document.getElementById('portfolioContactForm');
-    if (form) form.addEventListener('submit', handleFormSubmit);
-});
 
 
 
@@ -420,7 +463,7 @@ const routes = {
     "#experience": { title: "Experience", content: views.experience, init: renderExperience },
     "#certifications": { title: "Credentials", content: views.certifications, init: renderCredentials },
     "#blog": { title: "Blog", content: views.blog, init: renderBlog },
-    "#contact": { title: "Contact", content: views.contact, init: renderContact }
+    "#contact": { title: "Contact", content: views.contact, init: initContact }
 };
 
 /**
