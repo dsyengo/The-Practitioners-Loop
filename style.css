@@ -366,6 +366,7 @@ body {
 
 /* Section Base */
 .about-section {
+  margin-top: 1.1rem;
   padding: 80px 0;
   background-color: #ffffff;
 }
@@ -1046,6 +1047,7 @@ body {
 
 /* contact */
 .contact-section {
+  margin-top: 1.2rem;
   padding: 80px 0;
   background: #fbfcfe;
 }
